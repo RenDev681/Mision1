@@ -1,0 +1,135 @@
+/*Variables globales de css*/
+:root{
+    --taman-cuadricula: 2;
+}
+
+html{
+    width: 100%;
+    height: 100%;
+}
+body{
+    width: 100%;
+    height: 100%;
+    margin: 0%;
+    background-image: url("Media/Images/background.jpeg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: brown;
+}
+
+
+/*Etiquetas del menu principal*/
+#mainMenu{
+    width: 100%;
+    height: 100%;
+    display: block;
+    position: relative;
+}
+
+#leftBox{
+    float: left;
+    height: 50%;
+    text-align: center;
+    width: 40%;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-image: url(Media/Images/menuSignL.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+#rightBox{
+    float: right;
+    height: 50%;
+    text-align: center;
+    width: 40%;
+    margin: 0;
+    position: relative;
+    top: 40%;
+    transform: translateY(-60%);
+    background-image: url(Media/Images/menuSignR.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+#title{
+    color: grey;
+    padding-top: 25%;
+    padding-left: 10%;
+}
+
+#selectorBox{
+    padding-left: 10%;
+}
+#selectorBox div{
+    padding: 1%;
+}
+#botonSelector{
+
+    width: 20%;
+    height: 20%;
+    border-top-width: 20%;
+}
+
+#questionImage{
+    width: 10%;
+    height: 10%;
+    padding: 2%;
+    top: 100%;
+    transform: translateY(-100%);
+    position: relative;
+}
+
+/*Etiquetas del la pantalla de juego*/
+#game{
+    display: none;
+}
+#cuadricula{
+    display: grid;
+    grid-template-columns: repeat(var(--taman-cuadricula), minmax(10px,1fr));   
+    grid-auto-rows:minmax(10px, auto);
+    grid-gap: 20px;
+}
+
+#player{
+    background-color: yellow;
+}
+
+#door{
+    background-color: black;
+}
+.floor{
+    background-color: green;
+}
+
+.letter{
+    background-color: antiquewhite;
+}
+
+.enemy{
+    background-color: red;
+}
+
+
+
+/*Etiquetas de la pantalla de muerte*/
+#deathScreen{
+    display: none;
+    text-align: center;
+}
+
+#deathBox div{
+    padding: 1%;
+}
+
+/*Etiquetas de la pantalla de victoria*/
+#victoryScreen{
+    display: none;
+    text-align: center;
+}
+
+#victoryBox div{
+    padding: 1%;
+}
