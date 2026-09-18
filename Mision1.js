@@ -48,8 +48,8 @@ function updateBoard(){
     counter.innerHTML = lettersCollected;
 
     searchEnemies();
-    for (var i = 0; i < numColumns; i++) {
-        for (var j = 0; j < numColumns; j++) {
+    for (let i = 0; i < numColumns; i++) {
+        for (let j = 0; j < numColumns; j++) {
             var tile = cuadricula.children[j+(i*numColumns)];
 
             if((tile.id==="player")||(tile.id==="door")){
@@ -98,8 +98,8 @@ function crearGrid(){
         cuadricula.removeChild(cuadricula.firstChild);
     }
     
-    for (var i = 0; i < numColumns; i++) {
-        for (var j = 0; j < numColumns; j++) {
+    for (let i = 0; i < numColumns; i++) {
+        for (let j = 0; j < numColumns; j++) {
 
             if(i==(numColumns-1) && j==0){
 
@@ -145,12 +145,13 @@ function crearGrid(){
         }
     }
     
-    for (var i = 0; i < numColumns; i++) {
-        for (var j = 0; j < numColumns; j++) {
-            var p = document.createElement("p");
+    for (let i = 0; i < numColumns; i++) {
+        for (let j = 0; j < numColumns; j++) {
+            var p = document.createElement("div");
             switch(board[[i, j]]){
                 case(1):
                     p.setAttribute("id", "player");
+                    
                     break;
                 case(2):
                     p.setAttribute("class", "floor");
@@ -166,8 +167,8 @@ function crearGrid(){
                 default:
                     break;
             }
-            var pTexto = document.createTextNode(board[[i,j]]);
-            p.appendChild(pTexto);
+            //var pTexto = document.createTextNode(board[[i,j]]);
+            //p.appendChild(pTexto);
             cuadricula.appendChild(p);
         }
     }
@@ -177,10 +178,10 @@ function crearGrid(){
 
 //Funcion para buscar el jugador 
 function searchPlayer(){
-    for(var i=0; i<numColumns; i++){
-        for(var j=0; j<numColumns; j++){
+    for(let i=0; i<numColumns; i++){
+        for(let j=0; j<numColumns; j++){
             if(board[[i,j]]==1){
-                var num=[i, j];
+                const num=[i, j];
                 return num;
             }
         }
@@ -233,8 +234,8 @@ function movePlayer(currentPlayerX, currentPlayerY, nextPlayerX, nextPlayerY){
 function searchEnemies(){
 
     var enemies = [];
-    for(var i=0; i<numColumns; i++){
-        for(var j=0; j<numColumns; j++){
+    for(let i=0; i<numColumns; i++){
+        for(let j=0; j<numColumns; j++){
             if(board[[i,j]]==4){
                 enemies.push({posX: i, posY: j}); //Si encuentra a uno lo mete en un array junto con su posicion X e Y
                 
@@ -250,8 +251,8 @@ function searchEnemies(){
 //esta funcion lo que hace es ver lo que tiene en los alrededores el enemigo, y dependiendo de esto, se mueve a una u a otra
 function checkSorroundings(X, Y){
     var posibleTiles = [];
-    for(var i=X-1;i<=(X+1);i++){
-        for(var j=Y-1;j<=(Y+1);j++){
+    for(let i=X-1;i<=(X+1);i++){
+        for(let j=Y-1;j<=(Y+1);j++){
             if((i>=0)&&(j>=0)&&(i<numColumns)&&(j<numColumns)){
                 switch(board[[i, j]]){
                     case(1):
@@ -333,32 +334,36 @@ function keyDownHandler(keyPressed) {
         let num = searchPlayer();
         var playerX = num[0];
         var playerY = num[1];
-    
+        let validInput = false;
         switch(keyPressed.key){
             case "ArrowRight":
                 if((playerY+1)>(numColumns-1))return;
                 rightPressed = true;
                 checkTile(playerX, playerY, playerX, playerY+1);
+                validInput = true;
                 break;
             case "ArrowLeft":
                 if((playerY-1)<0)return;
                 leftPressed = true;
                 checkTile(playerX, playerY, playerX, playerY-1);
+                validInput = true;
                 break;
             case "ArrowUp":
                 if((playerX-1)<0)return;
                 upPressed = true;
                 checkTile(playerX, playerY, playerX-1, playerY);
+                validInput = true;
                 break;
             case "ArrowDown":
                 if((playerX+1)>(numColumns-1))return;
                 downPressed = true;
                 checkTile(playerX, playerY, playerX+1, playerY);
+                validInput = true;
                 break;
             default:
                 break;
         }
-    updateBoard();
+    if(validInput) updateBoard();
     }
 }
 
