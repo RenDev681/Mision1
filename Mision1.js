@@ -45,7 +45,7 @@ let downPressed = false;
 //Función para actualizar el tablero de juego despues de cada movimiento
 function updateBoard(){
     
-    counter.innerHTML = lettersCollected;
+    counter.textContent = lettersCollected;
 
     searchEnemies();
     for (let i = 0; i < numColumns; i++) {
@@ -191,7 +191,7 @@ function searchPlayer(){
 //Función que se ejecuta cuando te has chocado contra un enemigo
 function death(){
     
-    finalLetterAmount[0].innerHTML = lettersCollected; //Como se explico anteriormente, este es un array con los dos contadores que tenemos, y en este caso, como en el html la pantalla de muerte esta antes, pues eleigimos el primer objeto de este array
+    finalLetterAmount[0].textContent = lettersCollected; //Como se explico anteriormente, este es un array con los dos contadores que tenemos, y en este caso, como en el html la pantalla de muerte esta antes, pues eleigimos el primer objeto de este array
     deathScreen.style.display = "block";
     gameScreen.style.display = "none";
 }
@@ -200,7 +200,7 @@ function death(){
 function victory(){
     victorySound.play();
     const finalText = lettersCollected + " letras, es debido a esto que has conseguido escribir" + bookSelector(); //TODO template
-    finalLetterAmount[1].innerHTML = finalText;
+    finalLetterAmount[1].textContent = finalText;
     victoryScreen.style.display = "block";
     gameScreen.style.display = "none";
 }
