@@ -30,6 +30,8 @@ https://stackoverflow.com/questions/1933969/sound-effects-in-javascript-html5
 https://developer.mozilla.org/es/docs/Web/API/Window/close
 https://www.freecodecamp.org/espanol/news/alineacion-vertical-css-como-centrar-un-div-un-texto-o-una-imagen-codigo-de-ejemplo-2/
 https://developer.mozilla.org/es/docs/Learn_web_development/Core/Text_styling/Web_fonts
+https://kinsta.com/es/blog/contorno-texto-css/
+https://es.stackoverflow.com/questions/403048/poner-borde-a-una-contendor
 
 
 Lo primero que haces nada más empezar es elegir de cuantas casillas quieres que sea el tablero de ancho, el número se encuentra entre 5 y 10, esto es debido a que si es menos de 5 es muy difícil y aburrido, y he puesto ese máximo para que no tardes mucho en jugar y las partidas se puedan acabar con rapidez. Estas cosas se le comentan si haces hover en el signo de interrogación que hay al lado del input.

@@ -11,36 +11,36 @@ de ellas se muevan hacia la que estaba (Aunque a lo mejor podría investigar dos
 
 //Variables
 //Variables del tablero
-var numColumns=0; //Variable que guardará el numero que meta el jugador
-var numTile=0; //Variable de la cantidad total de casillas que habrá
-var board = [[]]; //Tablero
-var cuadricula; //La cuadricula es el espacio fisico del tablero en el html, mientras que la variable anterior es el estado que te dice que casilla es que
-var levels=3; //Cantidad de niveles que va a haber, se puede poner los que quieras
-var lettersCollected=0; //Numero de letras recolectadas por el jugador
-var maxLetters=0; //Numero que guardara cuantas letras han aparecido en total, esta variable ira aumentando al pasar de niveles
-var enemyNum=0; 
-var letterNum=0;
+let numColumns=0; //Variable que guardará el numero que meta el jugador
+let numTile=0; //Variable de la cantidad total de casillas que habrá
+let board = [[]]; //Tablero
+let cuadricula; //La cuadricula es el espacio fisico del tablero en el html, mientras que la variable anterior es el estado que te dice que casilla es que
+let levels=3; //Cantidad de niveles que va a haber, se puede poner los que quieras
+let lettersCollected=0; //Numero de letras recolectadas por el jugador
+let maxLetters=0; //Numero que guardara cuantas letras han aparecido en total, esta variable ira aumentando al pasar de niveles
+let enemyNum=0; 
+let letterNum=0;
 
 
 //Variables del documento
-var counter = document.getElementById("counter");
-var mainMenu = document.getElementById("mainMenu");
-var gameScreen = document.getElementById("game");
-var deathScreen = document.getElementById("deathScreen");
-var victoryScreen = document.getElementById("victoryScreen");
-var finalLetterAmount = document.getElementsByClassName("finalCounter"); //En este caso, elegimos usar el getElementsByClassName porque a la diferencia de las lineas anteriores, tenemos dos contadores finales, por lo que se guarda como si fuera un array
+const counter = document.getElementById("counter");
+const mainMenu = document.getElementById("mainMenu");
+const gameScreen = document.getElementById("game");
+const deathScreen = document.getElementById("deathScreen");
+const victoryScreen = document.getElementById("victoryScreen");
+const finalLetterAmount = document.getElementsByClassName("finalCounter"); //En este caso, elegimos usar el getElementsByClassName porque a la diferencia de las lineas anteriores, tenemos dos contadores finales, por lo que se guarda como si fuera un array
 
-var entetyNum; //Variable que va a controlar cuantas letras y enemigos hay, uso la misma porque quiero que haya el mismo número de ambas
+let entetyNum; //Variable que va a controlar cuantas letras y enemigos hay, uso la misma porque quiero que haya el mismo número de ambas
 
 //Variables de sonido
-var mouseSound = new Audio("Media/Sound/squeak.mp3");
-var victorySound = new Audio("Media/Sound/yay.mp3");
+const mouseSound = new Audio("Media/Sound/squeak.mp3");
+const victorySound = new Audio("Media/Sound/yay.mp3");
 
 //Variables de Inputs
-var rightPressed = false;
-var leftPressed = false;
-var upPressed = false;
-var downPressed = false;
+let rightPressed = false;
+let leftPressed = false;
+let upPressed = false;
+let downPressed = false;
 
 //Función para actualizar el tablero de juego despues de cada movimiento
 function updateBoard(){
@@ -50,7 +50,7 @@ function updateBoard(){
     searchEnemies();
     for (let i = 0; i < numColumns; i++) {
         for (let j = 0; j < numColumns; j++) {
-            var tile = cuadricula.children[j+(i*numColumns)];
+            const tile = cuadricula.children[j+(i*numColumns)];
 
             if((tile.id==="player")||(tile.id==="door")){
                 tile.removeAttribute("id");
@@ -109,7 +109,7 @@ function crearGrid(){
                 board[[i, j]] = 5;
             }else if(((i==(numColumns-2))&&(j==0))||((i==(numColumns-2))&&(j==1))||((i==(numColumns-1))&&(j==(numColumns-2)))){ //Esto es para asegurarse de que ningun enemigo aparece al lado del personaje al principio
                 
-                var randNum = Math.floor(Math.random() * (4-2) +2); //En este caso elegimos un numero entre el 2 y 3, puesto que al no poder ser un enemigo, solo puede ser suelo o letra
+                let randNum = Math.floor(Math.random() * (4-2) +2); //En este caso elegimos un numero entre el 2 y 3, puesto que al no poder ser un enemigo, solo puede ser suelo o letra
                 if((randNum==3)&&(letterNum<entetyNum)){
                     board[[i, j]] = randNum;
                     letterNum++;
@@ -117,7 +117,7 @@ function crearGrid(){
                     board[[i, j]] = 2;
                 }
             }else{
-                var randNum = Math.floor(Math.random() * (5-2) +2); //Elegimos un numero random que será que tipo de casilla es
+                let randNum = Math.floor(Math.random() * (5-2) +2); //Elegimos un numero random que será que tipo de casilla es
                 switch(randNum){
                     case(2):
                         board[[i, j]] = randNum;
@@ -147,7 +147,7 @@ function crearGrid(){
     
     for (let i = 0; i < numColumns; i++) {
         for (let j = 0; j < numColumns; j++) {
-            var p = document.createElement("div");
+            let p = document.createElement("div");
             switch(board[[i, j]]){
                 case(1):
                     p.setAttribute("id", "player");
@@ -199,7 +199,7 @@ function death(){
 //Funcion que se ejecuta cuando ya te has pasado todos los niveles
 function victory(){
     victorySound.play();
-    var finalText = lettersCollected + " letras, es debido a esto que has conseguido escribir" + bookSelector();
+    const finalText = lettersCollected + " letras, es debido a esto que has conseguido escribir" + bookSelector(); //TODO template
     finalLetterAmount[1].innerHTML = finalText;
     victoryScreen.style.display = "block";
     gameScreen.style.display = "none";
@@ -233,7 +233,7 @@ function movePlayer(currentPlayerX, currentPlayerY, nextPlayerX, nextPlayerY){
 //Funcion que busca a todos los enemigos que hay en el tablero
 function searchEnemies(){
 
-    var enemies = [];
+    let enemies = [];
     for(let i=0; i<numColumns; i++){
         for(let j=0; j<numColumns; j++){
             if(board[[i,j]]==4){
@@ -250,7 +250,7 @@ function searchEnemies(){
 
 //esta funcion lo que hace es ver lo que tiene en los alrededores el enemigo, y dependiendo de esto, se mueve a una u a otra
 function checkSorroundings(X, Y){
-    var posibleTiles = [];
+    let posibleTiles = [];
     for(let i=X-1;i<=(X+1);i++){
         for(let j=Y-1;j<=(Y+1);j++){
             if((i>=0)&&(j>=0)&&(i<numColumns)&&(j<numColumns)){
@@ -273,7 +273,7 @@ function checkSorroundings(X, Y){
         
     }
 
-    var randNum = Math.floor(Math.random() * (posibleTiles.length-0));
+    let randNum = Math.floor(Math.random() * (posibleTiles.length-0));
 
 
     if(posibleTiles.length>0){
@@ -332,8 +332,8 @@ function keyDownHandler(keyPressed) {
 
     if(numColumns!=0){
         let num = searchPlayer();
-        var playerX = num[0];
-        var playerY = num[1];
+        let playerX = num[0];
+        let playerY = num[1];
         let validInput = false;
         switch(keyPressed.key){
             case "ArrowRight":

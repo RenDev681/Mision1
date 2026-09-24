@@ -128,9 +128,14 @@ body{
     width: 90%;
     grid-template-columns: repeat(var(--taman-cuadricula), minmax(10px,20%));   
     grid-auto-rows:minmax(10px, 20%);
-    grid-gap: 20px;
+    grid-gap: 2%;
 }
 
+#cuadricula div{
+    border-color: black;
+    border-width: 1%;
+    border-style: solid;
+}
 #player{
     background-image: url("Media/Images/character.png");
     background-size: contain;
@@ -139,7 +144,10 @@ body{
 }
 
 #door{
-    background-image: url("Media/Images/background.jpeg");
+    background-image: url("Media/Images/exit.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 .floor{
     background-image: url("Media/Images/menuSignL.png");
