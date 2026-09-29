@@ -6,6 +6,8 @@ de ellas se muevan hacia la que estaba (Aunque a lo mejor podría investigar dos
 -Apartado visual de los niveles
 -Apartado visual de la pantalla de muerte
 -Apartado visual de la pantalla final del juego
+-Arreglar las cosas nuevas
+addListener en vez de onclick
 */
 
 
