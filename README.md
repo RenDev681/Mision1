@@ -1,3 +1,29 @@
+# Ratón de biblioteca
+
+Misión M1 · El Despertar del DOM — Web Development I.
+
+## Cómo probarlo
+Lo primero que haces nada más empezar es elegir de cuantas casillas quieres que sea el tablero de ancho, el número se encuentra entre 5 y 10, esto es debido a que si es menos de 5 es muy difícil y aburrido, y he puesto ese máximo para que no tardes mucho en jugar y las partidas se puedan acabar con rapidez. Estas cosas se le comentan si haces hover en el signo de interrogación que hay al lado del input.
+Tras esto, entras en el juego, el cual consiste en recoger las letras que hay repartidas por el tablero, mientras se esquivan enemigos. Para poder pasarse el nivel no se necesitan recoger todas las letras que se encuentran repartidas por el, debido a que puedes ir directamente a la meta, pero esto no es recomendable, ya que tu puntuación final se basa en la cantidad de letras que hayas cogido. Una vez hayas acabado los tres niveles de los que se compone este juego, te saldrá una pantallita de victoria en la cual, dependiendo de cuantas letras hayas cogido te saldrá un libro más o menos largo. Si por otro lado, no has podido acabar y te toca un enemigo, deberás volver a empezar pulsando al botón que hay en la pantalla de muerte.
+
+## Uso de IA
+Para este trabajo no se ha usado lo más mínimo de inteligencia artificial, ya sea para crear código, sprites, o preguntar dudas.
+Todo ha sido hecho a mano, y para las cosas de código que no sabía, use las fuentes de información que pongo más adelante.
+
+## Autopsia
+1. Guardo la posición del bug activo en una variable del módulo en vez
+   de leerla del DOM cada vez, porque el DOM solo debería reflejar el
+   estado, no ser la fuente de verdad. Descarté buscar la casilla por su
+   clase CSS: es más frágil y acopla la lógica al aspecto.
+2. Uso un solo listener en el contenedor de la cuadrícula (delegación) en
+   vez de nueve listeners, uno por casilla. Descarté los nueve porque al
+   reiniciar la partida habría que quitarlos y volver a ponerlos, y es
+   justo donde aparecen los bugs de eventos duplicados.
+
+
+
+
+## Fuentes de información
 https://developer.mozilla.org/es/docs/Learn_web_development/Core/CSS_layout/Grids
 https://developer.mozilla.org/es/docs/Web/CSS/Guides/Grid_layout/Basic_concepts
 https://developer.mozilla.org/es/docs/Web/CSS/Reference/Properties/grid-template-rows
@@ -32,7 +58,3 @@ https://www.freecodecamp.org/espanol/news/alineacion-vertical-css-como-centrar-u
 https://developer.mozilla.org/es/docs/Learn_web_development/Core/Text_styling/Web_fonts
 https://kinsta.com/es/blog/contorno-texto-css/
 https://es.stackoverflow.com/questions/403048/poner-borde-a-una-contendor
-
-
-Lo primero que haces nada más empezar es elegir de cuantas casillas quieres que sea el tablero de ancho, el número se encuentra entre 5 y 10, esto es debido a que si es menos de 5 es muy difícil y aburrido, y he puesto ese máximo para que no tardes mucho en jugar y las partidas se puedan acabar con rapidez. Estas cosas se le comentan si haces hover en el signo de interrogación que hay al lado del input.
-Tras esto, entras en el juego, el cual consiste en recoger las letras que hay repartidas por el tablero, mientras se esquivan enemigos. Para poder pasarse el nivel no se necesitan recoger todas las letras que se encuentran repartidas por el, debido a que puedes ir directamente a la meta, pero esto no es recomendable, ya que tu puntuación final se basa en la cantidad de letras que hayas cogido. Una vez hayas acabado los tres niveles de los que se compone este juego, te saldrá una pantallita de victoria en la cual, dependiendo de cuantas letras hayas cogido te saldrá un libro más o menos largo. Si por otro lado, no has podido acabar y te toca un enemigo, deberás volver a empezar pulsando al botón que hay en la pantalla de muerte.
