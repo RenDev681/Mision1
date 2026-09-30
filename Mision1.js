@@ -26,6 +26,8 @@ let letterNum=0;
 
 //Variables del documento
 const counter = document.getElementById("counter");
+const botonSelector = document.getElementById("botonSelector");
+const botonExit = document.getElementById("botonExit");
 const mainMenu = document.getElementById("mainMenu");
 const gameScreen = document.getElementById("game");
 const deathScreen = document.getElementById("deathScreen");
@@ -43,6 +45,8 @@ let rightPressed = false;
 let leftPressed = false;
 let upPressed = false;
 let downPressed = false;
+
+
 
 //Función para actualizar el tablero de juego despues de cada movimiento
 function updateBoard(){
@@ -328,6 +332,10 @@ function checkTile(currentPlayerX, currentPlayerY, nextPlayerX, nextPlayerY){
 
 document.addEventListener("keydown", keyDownHandler, false); //Un eventListener que detecta cuando as pulsado una tecla
 document.addEventListener("keyup", keyUpHandler, false); //Un eventListener que detecta cuando has dejado de pulsar una tecla
+
+botonSelector.addEventListener("click", crearGrid);
+botonExit.addEventListener("click", exit);
+
 
 //Cuando pulsas una tecla
 function keyDownHandler(keyPressed) {
