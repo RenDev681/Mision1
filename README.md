@@ -58,3 +58,4 @@ https://www.freecodecamp.org/espanol/news/alineacion-vertical-css-como-centrar-u
 https://developer.mozilla.org/es/docs/Learn_web_development/Core/Text_styling/Web_fonts
 https://kinsta.com/es/blog/contorno-texto-css/
 https://es.stackoverflow.com/questions/403048/poner-borde-a-una-contendor
+https://es.stackoverflow.com/questions/392837/como-poner-addeventlistener-para-un-array
