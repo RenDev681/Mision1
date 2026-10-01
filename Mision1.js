@@ -22,12 +22,13 @@ let lettersCollected=0; //Numero de letras recolectadas por el jugador
 let maxLetters=0; //Numero que guardara cuantas letras han aparecido en total, esta variable ira aumentando al pasar de niveles
 let enemyNum=0; 
 let letterNum=0;
-
+let isDark = false;
 
 //Variables del documento
 const counter = document.getElementById("counter");
 const botonSelector = document.getElementById("botonSelector");
 const botonExit = document.getElementById("botonExit");
+const botonReset = document.getElementsByClassName("resetBoton");
 const mainMenu = document.getElementById("mainMenu");
 const gameScreen = document.getElementById("game");
 const deathScreen = document.getElementById("deathScreen");
@@ -334,16 +335,25 @@ document.addEventListener("keydown", keyDownHandler, false); //Un eventListener 
 document.addEventListener("keyup", keyUpHandler, false); //Un eventListener que detecta cuando has dejado de pulsar una tecla
 
 botonSelector.addEventListener("click", crearGrid);
-botonExit.addEventListener("click", exit);
+botonExit.addEventListener("click", ()=>{
+    window.close();
+});
 
+botonReset.forEach(boton => boton.addEventListener('input', reset));
 
 //Cuando pulsas una tecla
 function keyDownHandler(keyPressed) {
 
     if((keyPressed.key === "k")||keyPressed.key === "d"){
-        console.log("La k fue presionada");
+        if(!isDark){
+            console.log("Cambiando a modo oscuro");
+            isDark=true;
+        }else{
+            console.log("Cambiando a modo claro");
+            isDark=false;
+        }
     }
-    
+
     if(numColumns!=0){
         let num = searchPlayer();
         let playerX = num[0];
@@ -405,8 +415,4 @@ function keyUpHandler(keyPressed) {
 
 function reset(){
     location.reload();
-}
-
-function exit(){
-    window.close();
 }
