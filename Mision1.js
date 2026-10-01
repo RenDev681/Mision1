@@ -1,16 +1,3 @@
-/*Lista de cosas que hacer:
-
--Que los enemigos se muevan de forma aleatoria a una de las casillas adyacentes en diagonal o a los lados, pero que si el personaje esta en una 
-de ellas se muevan hacia la que estaba (Aunque a lo mejor podría investigar dos casillas a los lados)
--Hacer apartado visual de la pnatalla de inicio
--Apartado visual de los niveles
--Apartado visual de la pantalla de muerte
--Apartado visual de la pantalla final del juego
--Arreglar las cosas nuevas
-addListener en vez de onclick
-*/
-
-
 //Variables
 //Variables del tablero
 let numColumns=0; //Variable que guardará el numero que meta el jugador
@@ -35,7 +22,7 @@ const deathScreen = document.getElementById("deathScreen");
 const victoryScreen = document.getElementById("victoryScreen");
 const finalLetterAmount = document.getElementsByClassName("finalCounter"); //En este caso, elegimos usar el getElementsByClassName porque a la diferencia de las lineas anteriores, tenemos dos contadores finales, por lo que se guarda como si fuera un array
 
-let entetyNum; //Variable que va a controlar cuantas letras y enemigos hay, uso la misma porque quiero que haya el mismo número de ambas
+let entityNum; //Variable que va a controlar cuantas letras y enemigos hay, uso la misma porque quiero que haya el mismo número de ambas
 
 //Variables de sonido
 const mouseSound = new Audio("Media/Sound/squeak.mp3");
@@ -47,11 +34,11 @@ let leftPressed = false;
 let upPressed = false;
 let downPressed = false;
 
-function forEachBoardCell(callback, cells=null){
+function forEachBoardTile(callback, tiles=null){
 
-    if(cells!=null){
-        for(const cell of cells){
-            callback(cell.posX, cell.posY, board[cell.posX][cell.posY]);
+    if(tiles!=null){
+        for(const tile of tiles){
+            callback(tile.posX, tile.posY, board[tile.posX][tile.posY]);
         }
         return;
     }
@@ -122,7 +109,7 @@ function updateBoard(tileToModify){
     }
 
     //Recorremos el tablero pero solo de las casillas que hayan cambiado
-    forEachBoardCell((i, j, tileValue)=>{
+    forEachBoardTile((i, j, tileValue)=>{
 
         const tile = getTileValue(i, j);
         setTile(tile, tileValue)
@@ -142,7 +129,7 @@ function crearGrid(){
     mainMenu.style.display = "none";
     gameScreen.style.display = "block";
 
-    entetyNum = numColumns-1; //Esto controla cuantas letras y enemigos va a haber, si modificamos ese numero podemos hacer que haya más o menos
+    entityNum = numColumns-1; //Esto controla cuantas letras y enemigos va a haber, si modificamos ese numero podemos hacer que haya más o menos
     letterNum = 0;
     enemyNum = 0;
 
@@ -158,7 +145,7 @@ function crearGrid(){
         cuadricula.removeChild(cuadricula.firstChild);
     }
     
-    forEachBoardCell((i, j, tileValue)=>{
+    forEachBoardTile((i, j, tileValue)=>{
         if(i==(numColumns-1) && j==0){
 
             board[i][j] = 1;
@@ -168,7 +155,7 @@ function crearGrid(){
         }else if(((i==(numColumns-2))&&(j==0))||((i==(numColumns-2))&&(j==1))||((i==(numColumns-1))&&(j==(numColumns-2)))){ //Esto es para asegurarse de que ningun enemigo aparece al lado del personaje al principio
                 
             let randNum = Math.floor(Math.random() * (4-2) +2); //En este caso elegimos un numero entre el 2 y 3, puesto que al no poder ser un enemigo, solo puede ser suelo o letra
-            if((randNum==3)&&(letterNum<entetyNum)){
+            if((randNum==3)&&(letterNum<entityNum)){
                 board[i][j] = randNum;
                 letterNum++;
             }else{
@@ -181,7 +168,7 @@ function crearGrid(){
                     board[i][j] = randNum;
                     break;
                 case(3):
-                    if(letterNum<entetyNum){
+                    if(letterNum<entityNum){
                         board[i][j] = randNum;
                         letterNum++;
                     }else{
@@ -189,7 +176,7 @@ function crearGrid(){
                     }
                     break;
                 case(4):
-                    if(enemyNum<entetyNum){
+                    if(enemyNum<entityNum){
                         board[i][j] = randNum;
                         enemyNum++;
                     }else{
@@ -202,7 +189,7 @@ function crearGrid(){
             }  
     });
     
-    forEachBoardCell((i, j, tileValue)=>{
+    forEachBoardTile((i, j, tileValue)=>{
         let p = document.createElement("div");
         setTile(p, tileValue);
         cuadricula.appendChild(p);
@@ -216,7 +203,7 @@ function crearGrid(){
 function searchPlayer(){
 
     let playerPosition = null;
-    forEachBoardCell((i, j, tileValue)=>{
+    forEachBoardTile((i, j, tileValue)=>{
         if(playerPosition===null && tileValue==1){
             playerPosition = [i, j];
         }
@@ -236,7 +223,7 @@ function death(){
 //Funcion que se ejecuta cuando ya te has pasado todos los niveles
 function victory(){
     victorySound.play();
-    const finalText = `${lettersCollected} letras, es debido a esto que has conseguido escribir ${bookSelector()}`; //TODO template
+    const finalText = `${lettersCollected} letras, es debido a esto que has conseguido escribir ${bookSelector()}`;
     finalLetterAmount[1].textContent = finalText;
     victoryScreen.style.display = "block";
     gameScreen.style.display = "none";
@@ -260,22 +247,12 @@ function bookSelector(){
     }
 }
 
-//Funcion que se encarga de actulizar el movimiento del jugador, la hice para no tener que poner este código tres veces en la funcion checkTile y que quedara más limpio
-function movePlayer(currentPlayerX, currentPlayerY, nextPlayerX, nextPlayerY){
-
-    board[currentPlayerX][currentPlayerY]=2;
-    board[nextPlayerX][nextPlayerY] = 1;
-
-    //TODO ESTO ES UNA PRUEBA
-    return[{posX: currentPlayerX, posY: currentPlayerY},{posX: nextPlayerX, posY: nextPlayerY}]
-}
-
 //Funcion que busca a todos los enemigos que hay en el tablero
 function searchEnemies(){
 
     let enemies = [];
 
-    forEachBoardCell((i, j, tileValue)=>{
+    forEachBoardTile((i, j, tileValue)=>{
 
         if(tileValue==4){
             enemies.push({posX: i, posY: j}); //Si encuentra a uno lo mete en un array junto con su posicion X e Y
@@ -286,7 +263,7 @@ function searchEnemies(){
     let enemyTiles = [];
     //Una vez a encontrado a todos, cada uno ejecuta la función de buscar en sus alrededores
     for(let e=0; e<enemies.length; e++){
-        const newEnemyTiles = checkSorroundings(enemies[e].posX, enemies[e].posY);
+        const newEnemyTiles = checkSurroundings(enemies[e].posX, enemies[e].posY);
         if(newEnemyTiles.length>0){
             enemyTiles.push(...newEnemyTiles);
         }
@@ -295,7 +272,7 @@ function searchEnemies(){
 }
 
 //esta funcion lo que hace es ver lo que tiene en los alrededores el enemigo, y dependiendo de esto, se mueve a una u a otra
-function checkSorroundings(X, Y){
+function checkSurroundings(X, Y){
     let posibleTiles = [];
 
     for(let i=X-1;i<=(X+1);i++){
@@ -324,39 +301,36 @@ function checkSorroundings(X, Y){
     const randNum = Math.floor(Math.random() * (posibleTiles.length-0));
 
     const nextTile = posibleTiles[randNum];
-    const enemyMovementTiles =enemyMovement(X, Y, nextTile.posX, nextTile.posY);
+    const enemyMovementTiles =moveEntity(X, Y, nextTile.posX, nextTile.posY, 4);
     console.log(`Enemigo en la posicion ${X} ${Y} se ha movido a la posicion ${posibleTiles[randNum].posX} ${posibleTiles[randNum].posY}`);
     return enemyMovementTiles;
 }
 
-function enemyMovement(currentEnemyX, currentEnemyY, nextEnemyX, nextEnemyY){
+//Funcion que se encarga de actulizar el movimiento de las entidades
 
+function moveEntity(currentX, currentY, nextX, nextY, entityValue){
 
-    board[currentEnemyX][currentEnemyY]=2;
-    board[nextEnemyX][nextEnemyY] = 4;
+    board[currentX][currentY]=2;
+    board[nextX][nextY]=entityValue;
 
-       //TODO ESTO ES UNA PRUEBA
-    return[{posX: currentEnemyX, posY: currentEnemyY},{posX: nextEnemyX, posY: nextEnemyY}]
+    return[{posX: currentX, posY: currentY},{posX: nextX, posY: nextY}];
 }
-
-
-
 
 //Función que funciona para saber que hay en la tile a la que te vas a mover, a este le tienes que pasar la posicion por separado del jugador, asi como a la que se quiere mover
 function checkTile(currentPlayerX, currentPlayerY, nextPlayerX, nextPlayerY){
 
     switch(board[nextPlayerX][nextPlayerY]){
         case(2):
-            return movePlayer(currentPlayerX, currentPlayerY, nextPlayerX, nextPlayerY);
+            return moveEntity(currentPlayerX, currentPlayerY, nextPlayerX, nextPlayerY, 1);
         case(3):
             lettersCollected+=1;
-            return movePlayer(currentPlayerX, currentPlayerY, nextPlayerX, nextPlayerY);
+            return moveEntity(currentPlayerX, currentPlayerY, nextPlayerX, nextPlayerY, 1);
 ;
         case(4):
             death(); //LLamamos a la funcion de muerte la cual nos mostrara como hemos terminado en terminos de letras, y nos dara la opcion de volver a jugar
             return [];
         case(5):
-            const checkTiles=movePlayer(currentPlayerX, currentPlayerY, nextPlayerX, nextPlayerY);
+            const checkTiles=moveEntity(currentPlayerX, currentPlayerY, nextPlayerX, nextPlayerY, 1);
             setTimeout(() => {
                 if(levels>1){
                     levels-=1;

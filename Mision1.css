@@ -158,12 +158,13 @@ input{
     background-repeat: no-repeat;
     background-position: center;
 }
-.floor{
-    background-image: url("Media/Images/menuSignL.png");
-}
+
 
 .letter{
-    background-image: url("Media/Images/menuSignR.png");
+    background-image: url("Media/Images/Letter.jpg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .enemy{
