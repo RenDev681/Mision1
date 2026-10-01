@@ -340,6 +340,10 @@ botonExit.addEventListener("click", exit);
 //Cuando pulsas una tecla
 function keyDownHandler(keyPressed) {
 
+    if((keyPressed.key === "k")||keyPressed.key === "d"){
+        console.log("La k fue presionada");
+    }
+    
     if(numColumns!=0){
         let num = searchPlayer();
         let playerX = num[0];
