@@ -346,10 +346,12 @@ function keyDownHandler(keyPressed) {
 
     if((keyPressed.key === "k")||keyPressed.key === "d"){
         if(!isDark){
-            console.log("Cambiando a modo oscuro");
+            document.documentElement.style.setProperty("--color-fondo-boton", "black");
+            document.documentElement.style.setProperty("--color-texto-boton", "white");
             isDark=true;
         }else{
-            console.log("Cambiando a modo claro");
+            document.documentElement.style.setProperty("--color-fondo-boton", "white");
+            document.documentElement.style.setProperty("--color-texto-boton", "black");
             isDark=false;
         }
     }

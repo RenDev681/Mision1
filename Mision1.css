@@ -9,6 +9,8 @@
 /*Variables globales de css*/
 :root{
     --taman-cuadricula: 2;
+    --color-fondo-boton: white;
+    --color-texto-boton: black;
 }
 
 html{
@@ -27,7 +29,14 @@ body{
     background-color: brown;
 }
 
+button{
+    background-color: var(--color-fondo-boton);
+    color: var(--color-texto-boton);
+}
 
+input{
+    background-color: var(--color-fondo-boton);
+}
 /*Etiquetas del menu principal*/
 #mainMenu{
     width: 100%;
