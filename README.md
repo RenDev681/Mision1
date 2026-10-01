@@ -59,3 +59,4 @@ https://developer.mozilla.org/es/docs/Learn_web_development/Core/Text_styling/We
 https://kinsta.com/es/blog/contorno-texto-css/
 https://es.stackoverflow.com/questions/403048/poner-borde-a-una-contendor
 https://es.stackoverflow.com/questions/392837/como-poner-addeventlistener-para-un-array
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals
